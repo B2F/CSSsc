@@ -1,0 +1,37 @@
+{
+  "name": "csssc",
+  "version": "1.7.3",
+  "description": "CSSsc is tool built take webpages screenshots and find image-based differences between website updates.",
+  "author": "B2F <d4rb2f@gmail.com>",
+  "bin": {
+    "csssc": "./bin/csssc.bin.js"
+  },
+  "scripts": {
+    "test": "mocha tests/suite.js"
+  },
+  "main": "csssc.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/B2F/CSSsc"
+  },
+  "bugs": {
+    "url": "https://github.com/B2F/CSSsc/issues"
+  },
+  "keywords": [
+    "css",
+    "regression",
+    "testing",
+    "screenshots",
+    "capture"
+  ],
+  "dependencies": {
+    "casperjs": "1.1.0-beta3"
+  },
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "preferGlobal": true,
+  "private": false,
+  "analyze": true,
+  "license": "MIT"
+}
