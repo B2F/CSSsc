@@ -23,6 +23,10 @@ describe('CSSsc configuration', function() {
     it('should define a default client driver', function() {
         assert.equal(csssc.getOpt('clientDriver'), './lib/csssc/CssscCasper.js');
     });
+
+    it('should define a default viewport', function() {
+        assert.ok(csssconfig.viewports.default.width);
+    });
 })
 
 describe('CSSsc updates', function() {

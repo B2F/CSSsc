@@ -12,16 +12,19 @@ var csssConfig = {};
 var stats = {
     planned: {
         pages:[],
+        viewports:[],
   },
 };
 /**
  * Validates csssConfig.pages, adds default values and required data:
  *
- * 'name': the webpage's name reference
- * 'url': the webpage's url used for taking screenshots
- * 'captures': all screenshots captures for this webpage
+ * 'name': the webpage's name reference.
+ * 'url': the webpage's url used for taking screenshots.
+ * 'captures': all screenshots captures for this webpage.
  */
 var validatePagesConfiguration = function() {
+
+    stats.planned.pages = Object.keys(csssConfig.pages);
 
     stats.planned.pages.forEach(function(page) {
 
@@ -49,6 +52,32 @@ var validatePagesConfiguration = function() {
         }
     });
 }
+/**
+ * Validates csssConfig.viewports configuration:
+ *
+ * 'name': the viewports name.
+ * 'height': the viewports height.
+ * 'width': the viewports width.
+ */
+var validateViewportsConfiguration = function() {
+
+    if (!csssConfig.viewports || typeof(csssConfig.viewports) != 'object') {
+        csssConfig.viewports = {
+            'default': {
+                'width':1366,
+                'height':768
+            }
+        }
+    }
+
+    Object.keys(csssConfig.viewports).forEach(function(viewportName) {
+      csssConfig.viewports[viewportName].name = viewportName;
+      if (typeof csssConfig.viewports[viewportName].height != 'number' ||
+          typeof csssConfig.viewports[viewportName].width != 'number') {
+        throw "[RAIMBOW] The viewport height and width must be set with numbers.";
+      }
+    });
+}
 
 /**
  * @public
@@ -60,7 +89,7 @@ module.exports = {
 
     initConfiguration: function(configuration) {
         csssConfig = configuration;
-        stats.planned.pages = Object.keys(csssConfig.pages);
+        validateViewportsConfiguration();
         validatePagesConfiguration();
     },
     getConfiguration: function() {
