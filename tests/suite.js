@@ -3,9 +3,11 @@ var assert          = require('assert'),
     fullPageConfig  = require('./sample_configs/full-pages.js');
 
 describe('configuration', function() {
-    it('should return a configuration object', function() {
+
+    it('should have pages stats', function() {
         csssc.loadConfiguration(fullPageConfig);
-        assert.equal(csssc.getPages(), fullPageConfig.pages);
+        var stats = csssc.getStats();
+        assert.notStrictEqual(stats.planned.pages, Object.keys(fullPageConfig.pages));
     });
 
 })

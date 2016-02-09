@@ -8,6 +8,12 @@
  */
 var csssconfig = {};
 
+var stats = {
+    planned: {
+      pages:[],
+    },
+};
+
 /**
  * @public
  * Module singleton.
@@ -17,8 +23,9 @@ module.exports = {
 
     loadConfiguration: function(configuration) {
         csssconfig = configuration;
+        stats.planned.pages = Object.keys(csssconfig.pages);
     },
-    getPages: function() {
-        return csssconfig.pages;
+    getStats: function() {
+        return stats;
     }
 }
