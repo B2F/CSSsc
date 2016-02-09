@@ -3,11 +3,11 @@
  * CSSsc main module definition.
  */
 
-var options = require('./lib/csssc/CssscOptions.js');
-
 /*
  * @private
  */
+var options = require('./lib/csssc/CssscOptions.js');
+var clientDriver = require(options.get('clientDriver'));
 var csssconfig = {};
 var stats = {
     planned: {
@@ -71,5 +71,8 @@ module.exports = {
     },
     getOpt: function(option) {
         return options.get(option);
+    },
+    getClient: function() {
+        return clientDriver;
     },
 }

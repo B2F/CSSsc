@@ -20,7 +20,14 @@ describe('CSSsc configuration', function() {
         assert.equal(csssconfig.pages.bodyCapture.captures.fullPage.selector, 'body');
     });
 
-    it('should define a browser client module', function() {
-        assert.equal(csssc.getOpt('browserClient'), 'casperjs');
+    it('should define a default client driver', function() {
+        assert.equal(csssc.getOpt('clientDriver'), './lib/csssc/CssscCasper.js');
+    });
+})
+
+describe('CSSsc updates', function() {
+
+    it('should use casperjs by default', function() {
+        assert.equal(csssc.getClient().name, 'casperjs');
     });
 })
