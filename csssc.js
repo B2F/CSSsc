@@ -3,6 +3,8 @@
  * CSSsc main module definition.
  */
 
+var options = require('./lib/csssc/CssscOptions.js');
+
 /*
  * @private
  */
@@ -66,5 +68,8 @@ module.exports = {
     },
     getStats: function() {
         return stats;
+    },
+    getOpt: function(option) {
+        return options.get(option);
     },
 }

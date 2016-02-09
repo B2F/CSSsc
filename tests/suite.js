@@ -19,4 +19,8 @@ describe('CSSsc configuration', function() {
     it('should have named selectors', function() {
         assert.equal(csssconfig.pages.bodyCapture.captures.fullPage.selector, 'body');
     });
+
+    it('should define a browser client module', function() {
+        assert.equal(csssc.getOpt('browserClient'), 'casperjs');
+    });
 })
