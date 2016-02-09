@@ -1,6 +1,6 @@
 var assert          = require('assert'),
     csssc           = require('../csssc.js'),
-    fullPageConfig  = require('./sample_configs/full-pages.js');
+    fullPageConfig  = require('./configuration_samples/full-pages.js');
 
 describe('CSSsc configuration', function() {
 

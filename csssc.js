@@ -8,14 +8,14 @@
  */
 var options = require('./lib/csssc/CssscOptions.js');
 var clientDriver = require(options.get('clientDriver'));
-var csssconfig = {};
+var csssConfig = {};
 var stats = {
     planned: {
         pages:[],
   },
 };
 /**
- * Validates csssconfig.pages, adds default values and required data:
+ * Validates csssConfig.pages, adds default values and required data:
  *
  * 'name': the webpage's name reference
  * 'url': the webpage's url used for taking screenshots
@@ -25,25 +25,25 @@ var validatePagesConfiguration = function() {
 
     stats.planned.pages.forEach(function(page) {
 
-        csssconfig.pages[page].name = page;
+        csssConfig.pages[page].name = page;
 
-        if (csssconfig.pages[page].url == undefined) {
+        if (csssConfig.pages[page].url == undefined) {
             throw '[ERROR] Your configuration page "' + page + '" requires an url."';
         }
-        if (csssconfig.pages[page].url.indexOf('://') == -1) {
-            csssconfig.pages[page].url = 'http://' + csssconfig.pages[page].url;
+        if (csssConfig.pages[page].url.indexOf('://') == -1) {
+            csssConfig.pages[page].url = 'http://' + csssConfig.pages[page].url;
         }
 
-        if (csssconfig.pages[page].captures == undefined || !Object.keys(csssconfig.pages[page].captures).length) {
-            csssconfig.pages[page].captures = {
+        if (csssConfig.pages[page].captures == undefined || !Object.keys(csssConfig.pages[page].captures).length) {
+            csssConfig.pages[page].captures = {
                 'body':''
             }
         }
 
-        var capturesConfig = csssconfig.pages[page].captures;
+        var capturesConfig = csssConfig.pages[page].captures;
 
         for (var c in capturesConfig) {
-            csssconfig.pages[page].captures[c] = {
+            csssConfig.pages[page].captures[c] = {
                 selector:capturesConfig[c] || c
             }
         }
@@ -59,12 +59,12 @@ var validatePagesConfiguration = function() {
 module.exports = {
 
     initConfiguration: function(configuration) {
-        csssconfig = configuration;
-        stats.planned.pages = Object.keys(csssconfig.pages);
+        csssConfig = configuration;
+        stats.planned.pages = Object.keys(csssConfig.pages);
         validatePagesConfiguration();
     },
     getConfiguration: function() {
-        return csssconfig;
+        return csssConfig;
     },
     getStats: function() {
         return stats;
