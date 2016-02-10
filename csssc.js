@@ -6,6 +6,9 @@
 /*
  * @private
  */
+var util = require('util');
+var EventEmitter = require('events').EventEmitter;
+var eventEmitter = new EventEmitter();
 var options = require('./lib/csssc/CssscOptions.js');
 var clientDriver = require(options.get('clientDriver'));
 var csssConfig = {};
@@ -109,4 +112,18 @@ module.exports = {
     getClient: function() {
         return clientDriver;
     },
+
+    emit: function(event) {
+        eventEmitter.emit(event);
+    },
+    on: function(event, callback) {
+        eventEmitter.on(event, callback);
+    },
+
+    /**
+     * Updates Screenshots captures References.
+     */
+    updateScRefs: function() {
+        clientDriver.parsePages(stats.planned, eventEmitter);
+    }
 }

@@ -30,8 +30,15 @@ describe('CSSsc configuration', function() {
 })
 
 describe('CSSsc updates', function() {
-
-    it('should use casperjs by default', function() {
-        assert.equal(csssc.getClient().name, 'casperjs');
+    var clientDriverRan = false;
+    before(function(done) {
+        csssc.on('updates ran', function() {
+            clientDriverRan = true;
+            done();
+        });
+        csssc.updateScRefs();
+    });
+    it('should run', function() {
+        assert.equal(clientDriverRan, true);
     });
 })
