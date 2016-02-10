@@ -11,7 +11,7 @@ var clientDriver = require(options.get('clientDriver'));
 var csssConfig = {};
 var stats = {
     planned: {
-        pages:[],
+        pages: {},
         viewports:[],
   },
 };
@@ -24,9 +24,7 @@ var stats = {
  */
 var validatePagesConfiguration = function() {
 
-    stats.planned.pages = Object.keys(csssConfig.pages);
-
-    stats.planned.pages.forEach(function(page) {
+    Object.keys(csssConfig.pages).forEach(function(page) {
 
         csssConfig.pages[page].name = page;
 
@@ -45,10 +43,17 @@ var validatePagesConfiguration = function() {
 
         var capturesConfig = csssConfig.pages[page].captures;
 
+        // Pages and captures may be limited by arguments in future builds, hence recording planned pages object separately.
+        stats.planned.pages[page] = {
+            url: csssConfig.pages[page].url,
+            captures: []
+        };
+
         for (var c in capturesConfig) {
             csssConfig.pages[page].captures[c] = {
                 selector:capturesConfig[c] || c
             }
+            stats.planned.pages[page].captures.push(c);
         }
     });
 }
@@ -74,7 +79,7 @@ var validateViewportsConfiguration = function() {
       csssConfig.viewports[viewportName].name = viewportName;
       if (typeof csssConfig.viewports[viewportName].height != 'number' ||
           typeof csssConfig.viewports[viewportName].width != 'number') {
-        throw "[RAIMBOW] The viewport height and width must be set with numbers.";
+        throw "[ERROR] Viewport height and width must be set with numbers.";
       }
     });
 }
