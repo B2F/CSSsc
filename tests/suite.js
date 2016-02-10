@@ -30,6 +30,7 @@ describe('CSSsc configuration', function() {
 })
 
 describe('CSSsc updates', function() {
+    this.timeout(5000);
     var clientDriverRan = false;
     before(function(done) {
         csssc.on('updates ran', function() {
